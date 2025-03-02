@@ -17,25 +17,32 @@ perform_convolution(input_matrix, kernel, strides, padding) Function:
 Takes the input matrix, kernel, strides, and padding as arguments.
 Reshaping for TensorFlow:
 input_matrix.reshape((1, 5, 5, 1)) adds a batch dimension (1) and a channel dimension (1) to the input matrix, which is required by tf.nn.conv2d().
+
 kernel.reshape((3, 3, 1, 1)) similarly reshapes the kernel.
+
 Tensor Conversion:
 tf.constant() converts the NumPy arrays to TensorFlow tensors.
+
 Convolution:
 tf.nn.conv2d() performs the 2D convolution.
 strides=[1, strides, strides, 1] sets the strides for the convolution. The first and last strides are 1 (for batch and channel dimensions), and the middle strides are the specified strides value.
+
 padding=padding sets the padding type.
+
 Reshaping for Output:
 output_tensor.numpy().reshape(output_tensor.shape[1], output_tensor.shape[2]) removes the batch and channel dimensions from the output tensor and converts it back to a NumPy array.
+
 Input Matrix and Kernel:
-
 The input matrix and kernel are defined as NumPy arrays.
-Convolution with Different Parameters:
 
+Convolution with Different Parameters:
 The perform_convolution() function is called with different combinations of strides and padding.
 The results are stored in a dictionary.
+
 Printing Results:
 
 The output feature maps are printed to the console, along with the corresponding stride and padding values.
+
 Q3. CNN Feature Extraction with Filters and Pooling
 
 Task 1: Implement Edge Detection Using Convolution
@@ -51,16 +58,18 @@ Load Image:
 
      * cv2.imread(image_path, cv2.IMREAD_GRAYSCALE) loads the image in grayscale mode.
      * Error handling is added to ensure that the file exists.
+     
 Apply Sobel Filter:
 
-cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3) applies the Sobel filter in the x-direction.
-cv2.CV_64F specifies the output image depth (64-bit float).
-1,0 specifies that the derivative is taken in the x direction.
-ksize=3 is the kernel size.
-cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3) applies the Sobel filter in the y-direction.
-0,1 specifies that the derivative is taken in the y direction.
-np.absolute() takes the absolute value of the result.
-np.uint8() converts the result back to 8-bit unsigned integer (for display).
+ * cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=3) applies the Sobel filter in the x-direction.
+ * cv2.CV_64F specifies the output image depth (64-bit float).
+ * 1,0 specifies that the derivative is taken in the x direction.
+ * ksize=3 is the kernel size.
+ * cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=3) applies the Sobel filter in the y-direction.
+ * 0,1 specifies that the derivative is taken in the y direction.
+ * np.absolute() takes the absolute value of the result.
+ * np.uint8() converts the result back to 8-bit unsigned integer (for display).
+ 
 Display Images:
 
   * matplotlib.pyplot is used to display the original image, the Sobel X result, and the Sobel Y result in a single figure.
@@ -83,12 +92,14 @@ The size parameter is (1, 4, 4, 1):
 4: Width.
 1: Number of channels (grayscale).
 tf.constant() converts the NumPy array to a TensorFlow tensor.
+
 3.Max Pooling:
 
 * tf.keras.layers.MaxPooling2D(pool_size=(2, 2), strides=(2, 2), padding='valid')(input_tensor) applies Max Pooling.
 * pool_size=(2, 2): The pooling window is 2x2.
 * strides=(2, 2): The window moves 2 pixels in each direction.
 * padding='valid' means no padding is applied.
+  
 4.Average Pooling:
 
 * tf.keras.layers.AveragePooling2D(pool_size=(2, 2), strides=(2, 2), padding='valid')(input_tensor) applies Average Pooling.
@@ -97,6 +108,7 @@ Print Results:
 
 input_matrix[0, :, :, 0] removes the batch and channel dimensions to print the original matrix.
 max_pool.numpy()[0, :, :, 0] and avg_pool.numpy()[0, :, :, 0] extract the NumPy arrays from the TensorFlow tensors and remove the batch and channel dimensions for printing.
+
 Q4. Implementing and Comparing CNN Architectures
 
 Task 1: Implement AlexNet Architecture
@@ -117,6 +129,7 @@ The default input shape is set to (227, 227, 3) which is a common input size for
 Num Classes:
 
 The default number of classes is set to 10. If you are working on a classification task with a different number of classes, you can modify this parameter.
+
 Task 2: Implement a Residual Block and ResNet
 
 residual_block() Function:
